@@ -1,20 +1,46 @@
+import { calculateDiscount } from "../utils/discountCalculator";
 
-export interface Product{
+export interface Review {
+        rating: number,
+        comment: string,
+        date: string,
+        reviewerName: string,
+        reviewerEmail: string
+}
+export interface ProductData{
     id: number,
     title: string,
     price: number,
     discountPercentage: number,
     category: string,
-    description?:string,
+    description?:string | undefined,
     brand?: string
+    reviews?: Review[],
 }
 
-export class Product implements Product{
+export class Product implements ProductData{
+    id: number;
+    title: string;
+    price: number;
+    discountPercentage: number;
+    category: string;
+    description?: string;
+    brand?: string;
+    reviews?: Review[];
+
     constructor(id: number, title: string, price: number, discountPercentage: number, category:string){
         this.id = id;
         this.title = title;
-        this.price = price;
-        this.discountPercentage = discountPercentage;
+        this.price = price || 0;
+        this.discountPercentage = discountPercentage || 0;
         this.category = category;
+    }
+
+    getPriceWithDiscount(){
+        return this.price - calculateDiscount(this.price, this.discountPercentage);
+    }
+
+    displayDetails(){
+        return `Title: ${this.title}\nPrice: $${this.price}\nDiscount Percentage: ${this.discountPercentage}%\nCategory: ${this.category}`;
     }
 }
