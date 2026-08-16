@@ -39,7 +39,6 @@ export interface ProductTemplate{
  * @param {number} limit - Maximum number of products to fetch.
  * @returns {Promise<Product[]>} A list of Product instances.
  */
-
 export const getInventory = async (limit: number = 30) => {
 
     try{
@@ -63,7 +62,8 @@ export const getInventory = async (limit: number = 30) => {
 
         return inventory;
     } catch(error: unknown){
-        errorHandler(error as Error)
+        errorHandler(error as Error);
+        return [];
     };
 }
 
@@ -82,7 +82,8 @@ export const getAllCategories = async () => {
 
         return response.json();
     } catch(error: unknown){
-        errorHandler(error as Error)
+        errorHandler(error as Error);
+        return [];
     };
 }
 
@@ -114,7 +115,8 @@ export const getProductsByCategory = async (category: string) => {
 
         return inventory;
     } catch(error: unknown){
-        errorHandler(error as Error)
+        errorHandler(error as Error);
+        return [];
     };
 }
 
@@ -149,7 +151,8 @@ export const sortProducts = async ( { target = 'title', order = 'asc', limit = 3
 
         return inventory;
     } catch(error: unknown){
-        errorHandler(error as Error)
+        errorHandler(error as Error);
+        return [];
     };
 }
 
@@ -181,7 +184,8 @@ export const searchProduct = async (target: string) => {
 
         return inventory;
     } catch(error: unknown){
-        errorHandler(error as Error)
+        errorHandler(error as Error);
+        return [];
     };
 }
 
@@ -202,7 +206,8 @@ export const getInventoryQty = async () => {
 
         return data.total;
     } catch(error: unknown){
-        errorHandler(error as Error)
+        errorHandler(error as Error);
+        return 0;
     };
 }
 
@@ -234,7 +239,7 @@ export const getProductById = async (id: number) => {
         return product;
 
     } catch(error: unknown){
-        errorHandler(error as Error)
+        errorHandler(error as Error);
     };
 }
 
@@ -265,7 +270,7 @@ export const addProduct = async (product:ProductTemplate) => {
         return await response.json();
 
     } catch(error: unknown){
-        errorHandler(error as Error)
+        errorHandler(error as Error);
     };
 }
 
