@@ -1,16 +1,32 @@
 import * as api from "./services/apiService"
+import { capitalize } from "./utils/general";
 
 // api.test()
 
 const searchBar = document.getElementById('searchBar') as HTMLInputElement;
+const filterCategories = document.getElementById('filterCategories') as HTMLUListElement;
 const productsTable = document.getElementById("productsTable") as HTMLTableSectionElement;
 
 let productsList: api.ProductTemplate[] = []
+let categoryList: string[] = []
+
+const updateCategories = (categories: string[]) => {
+
+    categories.forEach(category => {
+        categoryList.push(category);
+
+        const cat = document.createElement("li");
+
+        cat.innerHTML = `<a data-category='${category}'>${capitalize(category)}</a>`;
+
+        filterCategories.appendChild(cat);
+    });
+}
 
 const renderTable = (products: api.ProductTemplate[]) => {
     // Cleans the table
     productsTable.innerHTML = "";
-
+    
     productsList = products
     console.log(productsList);
     products.forEach(product => {
@@ -36,3 +52,4 @@ const renderTable = (products: api.ProductTemplate[]) => {
 }
 
 renderTable(await api.getInventory(0) as api.ProductTemplate[]);
+updateCategories(await api.getAllCategories());
