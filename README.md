@@ -78,7 +78,7 @@ src/
 ## 📥 Installation & Setup
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/chadgarc/SBA6-E-Commerce-System.git
 cd e-commerce-system/dev
 pnpm install
 pnpm dev
