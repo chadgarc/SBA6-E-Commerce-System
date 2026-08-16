@@ -12,6 +12,11 @@ enum ERROR{
     SEARCH = "No matching products"
 }
 
+/**
+ * Shape of a product object used for adding or update methods
+ * All fields are optional to allow partial attributed.
+ */
+
 export interface ProductTemplate{
     id?: number,
     title?: string,
@@ -28,6 +33,12 @@ export interface ProductTemplate{
  * THIS SECTION RETRIEVES DATA FROM API
  *
  * */
+
+/**
+ * Retrieves a list of products from the API.
+ * @param {number} limit - Maximum number of products to fetch.
+ * @returns {Promise<Product[]>} A list of Product instances.
+ */
 
 export const getInventory = async (limit: number = 30) => {
 
@@ -56,6 +67,10 @@ export const getInventory = async (limit: number = 30) => {
     };
 }
 
+/**
+ * Retrieves all available product categories from the API.
+ * @returns {Promise<string[]>} A list of category names.
+ */
 export const getAllCategories = async () => {
 
     try{
@@ -71,6 +86,11 @@ export const getAllCategories = async () => {
     };
 }
 
+/**
+ * Retrieves all products from a specific category.
+ * @param {string} category - Category name to filter products.
+ * @returns {Promise<Product[]>} A list of Product instances.
+ */
 export const getProductsByCategory = async (category: string) => {
 
     try{
@@ -98,7 +118,14 @@ export const getProductsByCategory = async (category: string) => {
     };
 }
 
-// asc or desc
+/**
+ * Retrieves products sorted by a specific field and order.
+ * @param {Object} options - Sorting configuration.
+ * @param {string} options.target - Field to sort by (e.g., title, price, category).
+ * @param {string} options.order - Sorting order ('asc' or 'desc').
+ * @param {number} options.limit - Maximum number of products to fetch.
+ * @returns {Promise<Product[]>} A sorted list of Product instances.
+ */
 export const sortProducts = async ( { target = 'title', order = 'asc', limit = 30 }) => {
 
     try{
@@ -126,6 +153,11 @@ export const sortProducts = async ( { target = 'title', order = 'asc', limit = 3
     };
 }
 
+/**
+ * Searches for products matching a given query string.
+ * @param {string} target - Search term to match product fields.
+ * @returns {Promise<Product[]>} A list of matching Product instances.
+ */
 export const searchProduct = async (target: string) => {
 
     try{
@@ -153,6 +185,10 @@ export const searchProduct = async (target: string) => {
     };
 }
 
+/**
+ * Retrieves the total number of products available in the API.
+ * @returns {Promise<number>} Total product count.
+ */
 export const getInventoryQty = async () => {
 
     try{
@@ -170,6 +206,11 @@ export const getInventoryQty = async () => {
     };
 }
 
+/**
+ * Retrieves a single product by its unique ID.
+ * @param {number} id - Product ID to search for.
+ * @returns {Promise<Product>} The matching Product instance.
+ */
 export const getProductById = async (id: number) => {
 
     try{
@@ -203,6 +244,11 @@ export const getProductById = async (id: number) => {
  *
  */
 
+/**
+ * Sends a new product to the API for creation. It will always add id:195
+ * @param {ProductTemplate} product - Product data to create.
+ * @returns {Promise<Object>} The created product returned by the API.
+ */
 export const addProduct = async (product:ProductTemplate) => {
 
     try{
@@ -229,6 +275,12 @@ export const addProduct = async (product:ProductTemplate) => {
  *
  */
 
+/**
+ * Updates an existing product using its ID.
+ * @param {number} id - ID of the product to update.
+ * @param {ProductTemplate} product - Fields to update.
+ * @returns {Promise<Object>} The updated product returned by the API.
+ */
 export const updateProduct = async (id:number, product:ProductTemplate) => {
     
     try{
@@ -249,6 +301,11 @@ export const updateProduct = async (id:number, product:ProductTemplate) => {
     };
 }
 
+/**
+ * Deletes a product from the API using its ID.
+ * @param {number} id - ID of the product to delete.
+ * @returns {Promise<Object>} The deleted product response from the API.
+ */
 export const deleteProduct = async (id:number) => {
 
     try{
@@ -260,4 +317,31 @@ export const deleteProduct = async (id:number) => {
     } catch(error: unknown){
         errorHandler(error as Error)
     };
+}
+
+// Testing all methods
+export const test = async () => {
+
+    console.log(await getProductsByCategory('laptops'))
+
+    console.log(await getInventory())
+
+    console.log(await getProductById(20))
+    
+    console.log(await getInventoryQty())
+    
+    console.log(await searchProduct("laptop"))
+    
+    console.log(await sortProducts({ limit: 0 }))
+    
+    console.log(await getAllCategories())
+
+    console.log(await addProduct({ title: 'BMW Pencil', price: 5.6, discountPercentage: 10, category: 'school' }));
+
+    console.log(await addProduct({ title: 'ASUS TUF F15', price: 980, discountPercentage: 15, category: 'laptop' }));
+
+    console.log(await updateProduct(194,{title: "iPhone 16", price: 900, discountPercentage: 0, brand: "Apple"}));
+
+    console.log(await deleteProduct(3));
+
 }

@@ -1,4 +1,7 @@
 
+/**
+ * Custom error type used for general API data retrieval failures.
+ */
 export class DataError extends Error{
 
     constructor(message: string){
@@ -7,6 +10,9 @@ export class DataError extends Error{
     }
 }
 
+/**
+ * Custom error type used when an invalid or non‑existent ID is requested.
+ */
 export class IdError extends Error{
 
     constructor(message: string){
@@ -15,6 +21,10 @@ export class IdError extends Error{
     }
 }
 
+/**
+ * Centralized error handler that logs custom and generic errors.
+ * @param {Error} error - Error instance to process.
+ */
 export const errorHandler = (error: Error) => {
     if(error instanceof DataError){
         console.error("Data Error:", error.message);
