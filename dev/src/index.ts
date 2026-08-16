@@ -3,7 +3,7 @@ import { capitalize } from "./utils/general";
 
 // api.test()
 
-const searchBar = document.getElementById('searchBar') as HTMLInputElement;
+// const searchBar = document.getElementById('searchBar') as HTMLInputElement;
 const filterCategories = document.getElementById('filterCategories') as HTMLUListElement;
 const productsTable = document.getElementById("productsTable") as HTMLTableSectionElement;
 

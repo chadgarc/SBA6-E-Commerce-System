@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,9 +7,164 @@
 
     <!-- Tailwind -->
 
-    <script type="module" crossorigin src="/assets/index-maiKVAGD.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BfvtR-Ua.css">
+    <script type="module" crossorigin src="/assets/index-Bd-AvlbJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Cf_R4EPy.css">
   </head>
   <body>
+
+    <main class="w-full flex flex-col flex-1">
+
+
+      <div class="navbar bg-blue-950 flex flex-col gap-4 flex-wrap">
+
+        <section class="flex justify-center items-center">
+          <h1 class="text-white font-bold text-xl mt-5">
+            E-Commerce Product Management System</h1>
+        </section>
+
+        <div class="flex flex-col items-center md:flex-row gap-8">
+
+          <input id="searchBar" type="text" placeholder="Search" class="input w-auto md:w-80" />
+          
+          <div class="dropdown dropdown-end me-4">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+              <button class="btn btn-primary">SortBy</button>
+            </div>
+            <ul
+              tabindex="-1"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              <li><a>Title</a></li>
+              <li><a>Price low to high</a></li>
+              <li><a>Price high to low</a></li>
+              <li><a>Category</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+              <button class="btn btn-primary">FilterBy</button>
+            </div>
+            <ul
+              tabindex="-1" id="filterCategories"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              <!-- Categories -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <section class="flex flex-col gap-10">
+
+        <button id="addProduct" onclick="addModal.showModal()" class="btn btn-primary ms-6 mt-6 w-20">ADD +</button>
+        
+        <!-- Table by DaisyUI -->
+        <div class="overflow-x-auto mx-auto">
+          <table class="table table-xs">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Discount</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="productsTable">
+              <!-- ts will add fields here -->
+              
+            </tbody>
+          </table>
+        </div>
+        
+      </section>
+
+    </main>
+
+    <dialog id="addModal" class="modal">
+      <div class="modal-box">
+
+        <h3 class="font-bold text-lg mb-4">Add Product</h3>
+
+        <form id="addForm" class="flex flex-col gap-4">
+
+          <label class="floating-label mt-4 mb-2">
+            <span class="font-bold text-lg">Title:</span>
+            <input id="add-title" type="text" class="input input-bordered w-full" placeholder="Enter title" />
+          </label>
+          <span id="add-title-error" class="font-bold text-sm text-error hidden">Title cannot be empty</span>
+
+          <label class="floating-label mt-4 mb-2">
+            <span class="font-bold text-lg">Price:</span>
+            <input id="add-price" type="text" inputmode="numeric" class="input input-bordered w-full" placeholder="Enter price" />
+          </label>
+          <span id="add-price-error" class="font-bold text-sm text-error hidden">Price cannot be empty</span>
+
+          <label class="floating-label mt-4 mb-2">
+            <span class="font-bold text-lg">Discount %:</span>
+            <input id="add-discount" type="text" inputmode="numeric" class="input input-bordered w-full" placeholder="Enter discount" />
+          </label>
+          <span id="add-discount-error" class="font-bold text-sm text-error hidden">Discount cannot be empty</span>
+
+          <label class="floating-label mt-4 mb-2">
+            <span class="font-bold text-lg">Category:</span>
+            <input id="add-category" type="text" class="input input-bordered w-full" placeholder="Enter category" />
+          </label>
+          <span id="add-category-error" class="font-bold text-sm text-error hidden">Category cannot be empty</span>
+
+          <div class="modal-action">
+            <button type="button" onclick="addModal.close()" class="btn btn-outline btn-error" id="addCancel">Cancel</button>
+            <button type="submit" class="btn btn-outline btn-info" id="addSave">Save</button>
+          </div>
+
+        </form>
+
+      </div>
+    </dialog>
+
+    <dialog id="updateModal" class="modal">
+      <div class="modal-box">
+
+        <h3 class="font-bold text-lg mb-4">Update Product</h3>
+
+        <form id="updateForm" class="flex flex-col gap-4">
+
+          <label class="floating-label mt-4 mb-2">
+            <span class="font-bold text-lg">Title:</span>
+            <input id="update-title" type="text" class="input input-bordered w-full" placeholder="Enter title" />
+          </label>
+          <span id="update-title-error" class="font-bold text-sm text-error hidden">Title cannot be empty</span>
+
+          <label class="floating-label mt-4 mb-2">
+            <span class="font-bold text-lg">Price:</span>
+            <input id="update-price" type="text" inputmode="numeric" class="input input-bordered w-full" placeholder="Enter price" />
+          </label>
+          <span id="update-price-error" class="font-bold text-sm text-error hidden">Price cannot be empty</span>
+
+          <label class="floating-label mt-4 mb-2">
+            <span class="font-bold text-lg">Discount %:</span>
+            <input id="update-discount" type="text" inputmode="numeric" class="input input-bordered w-full" placeholder="Enter discount" />
+          </label>
+          <span id="update-discount-error" class="font-bold text-sm text-error hidden">Discount cannot be empty</span>
+
+          <label class="floating-label mt-4 mb-2">
+            <span class="font-bold text-lg">Category:</span>
+            <input id="update-category" type="text" class="input input-bordered w-full" placeholder="Enter category" />
+          </label>
+          <span id="update-category-error" class="font-bold text-sm text-error hidden">Category cannot be empty</span>
+
+          <div class="modal-action">
+            <button type="button" class="btn btn-outline btn-error" id="updateCancel">Cancel</button>
+            <button type="submit" class="btn btn-outline btn-info" id="updateSave">Update</button>
+          </div>
+
+        </form>
+
+      </div>
+    </dialog>
+
+
+
   </body>
 </html>

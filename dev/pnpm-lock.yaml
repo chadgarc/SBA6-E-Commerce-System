@@ -11,6 +11,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.2.1(jiti@2.7.0))
+      daisyui:
+        specifier: ^5.7.17
+        version: 5.7.17
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
@@ -229,6 +232,9 @@ packages:
     resolution: {integrity: sha512-yYU8cogLeSh/ms2jh8Fj7jaba/EWa7Ja6GoUqYZaraEuCI5YS6ms6ObZgjjedm+jm6XZjdNRWBpPP6Z86oOxcw==}
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7 || ^8
+
+  daisyui@5.7.17:
+    resolution: {integrity: sha512-w5U5FdL9hH4/zh8eLXytWQt3c0DgHS1WDw+1yuQykT8nSIE9Vc5wkJVeDymD1JlRDLANDawvN4iIGVaxgV6Cjw==}
 
   detect-libc@2.1.2:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
@@ -628,6 +634,8 @@ snapshots:
       '@tailwindcss/oxide': 4.3.3
       tailwindcss: 4.3.3
       vite: 8.2.1(jiti@2.7.0)
+
+  daisyui@5.7.17: {}
 
   detect-libc@2.1.2: {}
 
