@@ -1,10 +1,16 @@
 import { DataError, IdError, errorHandler } from "../utils/errorHandler";
 import { Product, type ProductData, type Review} from "../models/Product";
 
+/**
+ * API base URLs used for product-related requests.
+ */
 enum PRODUCTS{
     URL = 'https://dummyjson.com/products',
 }
 
+/**
+ * Error messages used across API operations.
+ */
 enum ERROR{
     ID = "ID doesn't exist",
     GET = "Unable to retrieve data",
@@ -158,6 +164,15 @@ export const sortProducts = async ( { target = 'title', order = 'asc', limit = 3
 
 /**
  * Searches for products matching a given query string.
+ *
+ * Behavior:
+ * - If the query is text, results come from the API `/search` endpoint.
+ * - If the query is a number, the function attempts to retrieve the product by ID.
+ * - Because the `/search` endpoint is limited to 30 results, the function also loads
+ *   the full inventory (`getInventory(0)`) to ensure ID-based searches work correctly.
+ * - If the product exists in the full inventory but is missing from the search results,
+ *   it is manually added to the beginning of the returned list.
+ *
  * @param {string} target - Search term to match product fields.
  * @returns {Promise<Product[]>} A list of matching Product instances.
  */
@@ -181,6 +196,21 @@ export const searchProduct = async (target: string) => {
                 product.category
             );
         })
+
+        // This will allow me to retrieve ids from the search bar
+        // I need to get all products because get by id has a limit of 30
+        const allProducts = await getInventory(0);
+        // Verify that the value is a number, if not I'll set 0 by default
+        const id: number = !Number.isNaN(target) ? Number(target) : 0;
+        // I'll check this Id is actually valid, if exist in the whole inventory, and if is highet that 30 because the limit of dummyjson
+        // or if the product is already in the list
+        if(allProducts.find(product => product.id === id) && (!inventory.some(product => product.id === id) || id > 30)){
+            // I'll get the target product and I add it to the inventory that reflects the results
+            const product = allProducts.find(product => product.id === id);
+            if(product){
+                inventory.unshift(product);
+            }
+        }
 
         return inventory;
     } catch(error: unknown){
@@ -324,7 +354,10 @@ export const deleteProduct = async (id:number) => {
     };
 }
 
-// Testing all methods
+/**
+ * Runs a series of API calls for debugging and demonstration purposes.
+ * Outputs results to the console.
+ */
 export const test = async () => {
 
     console.log(await getProductsByCategory('laptops'))

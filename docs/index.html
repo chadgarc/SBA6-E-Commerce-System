@@ -6,8 +6,8 @@
     <title>E-Commerce Management</title>
 
     
-    <script type="module" crossorigin src="./assets/index-Bd-AvlbJ.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Cf_R4EPy.css">
+    <script type="module" crossorigin src="./assets/index-PaJ8Ovo6.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BC-0YYxo.css">
   </head>
   <body>
 
@@ -25,17 +25,18 @@
 
           <input id="searchBar" type="text" placeholder="Search" class="input w-auto md:w-80" />
           
+          <!-- SortBy Button -->
           <div class="dropdown dropdown-end me-4">
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
               <button class="btn btn-primary">SortBy</button>
             </div>
-            <ul
+            <ul id="sortByList"
               tabindex="-1"
               class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-              <li><a>Title</a></li>
-              <li><a>Price low to high</a></li>
-              <li><a>Price high to low</a></li>
-              <li><a>Category</a></li>
+              <li><a data-sort='{"type": "title"}'>Title</a></li>
+              <li><a data-sort='{"type": "price"}'>Price low to high</a></li>
+              <li><a data-sort='{"type": "price", "order": "desc"}'>Price high to low</a></li>
+              <li><a data-sort='{"type": "category"}'>Category</a></li>
             </ul>
           </div>
 
@@ -47,6 +48,7 @@
               tabindex="-1" id="filterCategories"
               class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
               <!-- Categories -->
+              <li><a data-category='reset'>RESET</a><br></li>
             </ul>
           </div>
         </div>
@@ -98,13 +100,13 @@
             <span class="font-bold text-lg">Price:</span>
             <input id="add-price" type="text" inputmode="numeric" class="input input-bordered w-full" placeholder="Enter price" />
           </label>
-          <span id="add-price-error" class="font-bold text-sm text-error hidden">Price cannot be empty</span>
+          <span id="add-price-error" class="font-bold text-sm text-error hidden">Price cannot be empty and It must be a number</span>
 
           <label class="floating-label mt-4 mb-2">
             <span class="font-bold text-lg">Discount %:</span>
             <input id="add-discount" type="text" inputmode="numeric" class="input input-bordered w-full" placeholder="Enter discount" />
           </label>
-          <span id="add-discount-error" class="font-bold text-sm text-error hidden">Discount cannot be empty</span>
+          <span id="add-discount-error" class="font-bold text-sm text-error hidden">Discount cannot be empty and It must be a number</span>
 
           <label class="floating-label mt-4 mb-2">
             <span class="font-bold text-lg">Category:</span>
@@ -113,8 +115,8 @@
           <span id="add-category-error" class="font-bold text-sm text-error hidden">Category cannot be empty</span>
 
           <div class="modal-action">
-            <button type="button" onclick="addModal.close()" class="btn btn-outline btn-error" id="addCancel">Cancel</button>
-            <button type="submit" class="btn btn-outline btn-info" id="addSave">Save</button>
+            <button type="button" class="btn btn-outline btn-error" id="addCancel">Cancel</button>
+            <button type="button" class="btn btn-outline btn-info" id="addSave">Save</button>
           </div>
 
         </form>
@@ -139,13 +141,13 @@
             <span class="font-bold text-lg">Price:</span>
             <input id="update-price" type="text" inputmode="numeric" class="input input-bordered w-full" placeholder="Enter price" />
           </label>
-          <span id="update-price-error" class="font-bold text-sm text-error hidden">Price cannot be empty</span>
+          <span id="update-price-error" class="font-bold text-sm text-error hidden">Price cannot be empty and It must be a number</span>
 
           <label class="floating-label mt-4 mb-2">
             <span class="font-bold text-lg">Discount %:</span>
             <input id="update-discount" type="text" inputmode="numeric" class="input input-bordered w-full" placeholder="Enter discount" />
           </label>
-          <span id="update-discount-error" class="font-bold text-sm text-error hidden">Discount cannot be empty</span>
+          <span id="update-discount-error" class="font-bold text-sm text-error hidden">Discount cannot be empty and It must be a number</span>
 
           <label class="floating-label mt-4 mb-2">
             <span class="font-bold text-lg">Category:</span>
@@ -155,7 +157,7 @@
 
           <div class="modal-action">
             <button type="button" class="btn btn-outline btn-error" id="updateCancel">Cancel</button>
-            <button type="submit" class="btn btn-outline btn-info" id="updateSave">Update</button>
+            <button type="button" class="btn btn-outline btn-info" id="updateSave">Update</button>
           </div>
 
         </form>
