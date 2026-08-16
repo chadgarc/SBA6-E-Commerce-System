@@ -8,18 +8,18 @@ export interface Review {
         reviewerEmail: string
 }
 export interface ProductData{
-    id: number,
+    id?: number,
     title: string,
     price: number,
     discountPercentage: number,
     category: string,
     description?:string | undefined,
-    brand?: string
+    brand?: string,
     reviews?: Review[],
 }
 
 export class Product implements ProductData{
-    id: number;
+    id: number|undefined;
     title: string;
     price: number;
     discountPercentage: number;
@@ -28,7 +28,7 @@ export class Product implements ProductData{
     brand?: string;
     reviews?: Review[];
 
-    constructor(id: number, title: string, price: number, discountPercentage: number, category:string){
+    constructor(id: number | undefined, title: string, price: number, discountPercentage: number, category:string){
         this.id = id;
         this.title = title;
         this.price = price || 0;
